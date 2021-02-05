@@ -4,7 +4,7 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY . .
-WORKDIR "/src/service-b"
+WORKDIR "/src/ServiceB"
 RUN dotnet build "ServiceB.csproj" -c Release -o /app/build
 
 FROM build AS publish

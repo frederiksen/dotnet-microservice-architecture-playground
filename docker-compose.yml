@@ -25,7 +25,7 @@ services:
     container_name: service-b
     build:
       context: .
-      dockerfile: DockerfileServiceA
+      dockerfile: DockerfileServiceB
   service-c:
     image: service-c
     container_name: service-c
