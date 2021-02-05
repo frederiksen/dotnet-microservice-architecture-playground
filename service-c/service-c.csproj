@@ -6,4 +6,8 @@
     <RootNamespace>service_c</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="6.3.1" />
+  </ItemGroup>
+
 </Project>
