@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>service_a_messages</RootNamespace>
+    <RootNamespace>ServiceBMessages</RootNamespace>
   </PropertyGroup>
 
 </Project>

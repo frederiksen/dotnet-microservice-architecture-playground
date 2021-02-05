@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>api_gateway</RootNamespace>
+    <RootNamespace>ApiGateway</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\service-c-messages\service-c-messages.csproj" />
+    <ProjectReference Include="..\ServiceCMessages\ServiceCMessages.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>service_b</RootNamespace>
+    <RootNamespace>ServiceB</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

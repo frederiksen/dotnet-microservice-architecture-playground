@@ -5,12 +5,12 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY . .
 WORKDIR "/src/service-b"
-RUN dotnet build "service-b.csproj" -c Release -o /app/build
+RUN dotnet build "ServiceB.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "service-b.csproj" -c Release -o /app/publish
+RUN dotnet publish "ServiceB.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "service-b.dll"]
+ENTRYPOINT ["dotnet", "ServiceB.dll"]

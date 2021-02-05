@@ -8,6 +8,7 @@ services:
       - 15672:15672
   api-gateway:
     image: api-gateway
+    container_name: api-gateway
     ports:
       - "80:80"
     build:
@@ -15,16 +16,19 @@ services:
       dockerfile: DockerfileApiGateway
   service-a:
     image: service-a
+    container_name: service-a
     build:
       context: .
       dockerfile: DockerfileServiceA
   service-b:
     image: service-b
+    container_name: service-b
     build:
       context: .
       dockerfile: DockerfileServiceA
   service-c:
     image: service-c
+    container_name: service-c
     build:
       context: .
       dockerfile: DockerfileServiceC
