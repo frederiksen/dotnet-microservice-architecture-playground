@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace service_c_messages
+namespace ServiceCMessages
 {
     public class ServiceCMessage1
     {

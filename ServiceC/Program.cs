@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
-using service_c_messages;
+using ServiceCMessages;
 
-namespace service_c
+namespace ServiceC
 {
     class Program
     {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EasyNetQ;
-using service_c_messages;
+using ServiceCMessages;
 
-namespace api_gateway.Controllers
+namespace ApiGateway.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
