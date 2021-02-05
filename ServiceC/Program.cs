@@ -12,21 +12,9 @@ namespace service_c
         {
             Console.WriteLine("Starting service c...");
 
-            IBus bus = null;
-            while (true)
-            {
-                try
-                {
-                    bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
-                    break;
-                }
-                catch (System.Exception)
-                {
-                    Console.WriteLine("RabbitMQ is not ready yet...");
-                    await Task.Delay(1000);
-                }
-            }
-            Console.WriteLine("RabbitMQ is now ready");
+            IBus bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
+            // RabbitMQ is ready in 10 sec.
+            // TODO: Poll to check when RabbitMQ is ready
             await Task.Delay(10*1000);
 
 //            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
