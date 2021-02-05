@@ -10,4 +10,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\service-c-messages\service-c-messages.csproj" />
+  </ItemGroup>
+
 </Project>

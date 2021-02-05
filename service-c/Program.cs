@@ -1,12 +1,37 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using EasyNetQ;
+using service_c_messages;
 
 namespace service_c
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Starting service c...");
+
+            IBus bus = null;
+            while (true)
+            {
+                try
+                {
+                    bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
+                    break;
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("RabbitMQ is not ready yet...");
+                    await Task.Delay(1000);
+                }
+            }
+            Console.WriteLine("RabbitMQ is now ready");
+
+            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
+
+            // Wait forever
+            await Task.Delay(Timeout.Infinite);
         }
     }
 }

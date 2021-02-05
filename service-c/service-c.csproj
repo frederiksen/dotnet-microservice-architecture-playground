@@ -10,4 +10,8 @@
     <PackageReference Include="EasyNetQ" Version="6.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\service-c-messages\service-c-messages.csproj" />
+  </ItemGroup>
+
 </Project>

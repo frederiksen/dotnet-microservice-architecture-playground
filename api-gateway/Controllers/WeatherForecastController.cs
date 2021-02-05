@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using EasyNetQ;
+using service_c_messages;
 
 namespace api_gateway.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -26,6 +28,14 @@ namespace api_gateway.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
+            bus.PubSub.Publish<ServiceCMessage1>(
+                new ServiceCMessage1 { Property1 = "Hej", Property2 = "med", Property3 = "dig" }
+            );
+
+            bus.Dispose();
+
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
