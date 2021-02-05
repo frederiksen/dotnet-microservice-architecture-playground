@@ -1,0 +1,24 @@
+version: "3.4"
+services:
+  api-gateway:
+    image: api-gateway
+    ports:
+      - "80:80"
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+  service-a:
+    image: service-a
+    build:
+      context: ./service-a
+      dockerfile: Dockerfile
+  service-b:
+    image: service-b
+    build:
+      context: ./service-b
+      dockerfile: Dockerfile
+  service-c:
+    image: service-c
+    build:
+      context: ./service-c
+      dockerfile: Dockerfile
