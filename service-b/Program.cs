@@ -26,6 +26,7 @@ namespace service_b
                 }
             }
             Console.WriteLine("RabbitMQ is now ready");
+            await Task.Delay(10*1000);
 
             bus.PubSub.Subscribe<string>("service-b", msg => Console.WriteLine(msg));
 

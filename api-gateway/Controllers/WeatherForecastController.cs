@@ -26,24 +26,21 @@ namespace api_gateway.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+//        public IEnumerable<WeatherForecast> Get()
+        public ServiceCTimeResponse Get()
         {
             var bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
-            bus.PubSub.Publish<ServiceCMessage1>(
-                new ServiceCMessage1 { Property1 = "Hej", Property2 = "med", Property3 = "dig" }
-            );
+            
+            // bus.PubSub.Publish<ServiceCMessage1>(
+            //     new ServiceCMessage1 { Property1 = "Hej", Property2 = "med", Property3 = "dig" }
+            // );
+
+            var request = new ServiceCTimeRequest {Message = "Hvad er klokken?"};
+            var response = bus.Rpc.Request<ServiceCTimeRequest, ServiceCTimeResponse>(request);
 
             bus.Dispose();
 
-
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return response;
         }
     }
 }

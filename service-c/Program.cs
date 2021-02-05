@@ -27,8 +27,14 @@ namespace service_c
                 }
             }
             Console.WriteLine("RabbitMQ is now ready");
+            await Task.Delay(10*1000);
 
-            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
+//            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
+
+            var random = new Random();
+            await bus.Rpc.RespondAsync<ServiceCTimeRequest, ServiceCTimeResponse>(request =>
+                new ServiceCTimeResponse{ Message = "her er svaret: " + random.Next(1000) }
+            );
 
             // Wait forever
             await Task.Delay(Timeout.Infinite);

@@ -4,15 +4,14 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY *.csproj .
-RUN dotnet restore
 COPY . .
-RUN dotnet build "service-a.csproj" -c Release -o /app/build
+WORKDIR "/src/api-gateway"
+RUN dotnet build "api-gateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "service-a.csproj" -c Release -o /app/publish
+RUN dotnet publish "api-gateway.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "service-a.dll"]
+ENTRYPOINT ["dotnet", "api-gateway.dll"]
