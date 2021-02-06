@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EasyNetQ;
+using ServiceAMessages;
+using ServiceBMessages;
 using ServiceCMessages;
 using ApiGateway.MessageBroker;
 
@@ -23,23 +25,24 @@ namespace ApiGateway.Controllers
             _mq = mq;
         }
 
-        [HttpGet("serviceahealthcheck")]
-        public string GetServiceAHealthCheck()
+        [HttpGet("healthcheck/{serviceName}")]
+        public string GetServiceAHealthCheck(string serviceName)
         {
-            return "OK";
+            switch (serviceName)
+            {
+                case "servicea":
+                    _logger.LogInformation("Performing health check for service a");
+                    return "a - ok";
+                case "serviceb":
+                    _logger.LogInformation("Performing health check for service b");
+                    return "b - ok";
+                case "servicec":
+                    _logger.LogInformation("Performing health check for service c");
+                    return "c - ok";
+            }
+            return "Unknown service";
         }            
 
-        [HttpGet("servicebhealthcheck")]
-        public string GetServiceBHealthCheck()
-        {
-            return "OK";
-        }            
-
-        [HttpGet("servicechealthcheck")]
-        public string GetServiceCHealthCheck()
-        {
-            return "OK";
-        }            
 
         [HttpGet]
 //        public IEnumerable<WeatherForecast> Get()

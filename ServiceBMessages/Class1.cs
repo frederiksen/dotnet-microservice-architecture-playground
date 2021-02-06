@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace service_b_messages
+namespace ServiceBMessages
 {
     public class Class1
     {

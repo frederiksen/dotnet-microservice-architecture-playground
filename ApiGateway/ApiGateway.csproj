@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceCMessages\ServiceCMessages.csproj" />
+    <ProjectReference Include="..\ServiceBMessages\ServiceBMessages.csproj" />
+    <ProjectReference Include="..\ServiceAMessages\ServiceAMessages.csproj" />
   </ItemGroup>
 
 </Project>

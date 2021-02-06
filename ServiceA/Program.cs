@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
 
-namespace service_a
+namespace ServiceA
 {
     class Program
     {
