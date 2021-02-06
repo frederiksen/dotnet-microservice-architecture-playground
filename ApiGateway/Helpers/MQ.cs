@@ -15,8 +15,6 @@ namespace ApiGateway.Helpers
 
         public MQ()
         {
-            Console.WriteLine("*************");
-            Console.WriteLine("MQ construtor");
             Bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
         }
     }

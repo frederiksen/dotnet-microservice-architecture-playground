@@ -11,14 +11,9 @@ using ApiGateway.Helpers;
 namespace ApiGateway.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/gateway")]
     public class GatewayController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<GatewayController> _logger;
         private readonly IMQ _mq;
 
@@ -27,6 +22,24 @@ namespace ApiGateway.Controllers
             _logger = logger;
             _mq = mq;
         }
+
+        [HttpGet("serviceahealthcheck")]
+        public string GetServiceAHealthCheck()
+        {
+            return "OK";
+        }            
+
+        [HttpGet("servicebhealthcheck")]
+        public string GetServiceBHealthCheck()
+        {
+            return "OK";
+        }            
+
+        [HttpGet("servicechealthcheck")]
+        public string GetServiceCHealthCheck()
+        {
+            return "OK";
+        }            
 
         [HttpGet]
 //        public IEnumerable<WeatherForecast> Get()
