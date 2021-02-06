@@ -45,11 +45,16 @@ namespace ApiGateway
                 app.UseDeveloperExceptionPage();
             }
 
+            // Configure swagger
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Gateway v1"));
 
-            app.UseRouting();
+            // Host static files from wwwroot
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
+            // Use and map controllers
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
