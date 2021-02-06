@@ -69,6 +69,12 @@ namespace ApiGateway.Controllers
             }
         }            
 
+        [HttpGet("os")]
+        public string GetOs()
+        {        
+            return System.Runtime.InteropServices.RuntimeInformation.OSDescription;    
+        }
+
 
         [HttpGet]
 //        public IEnumerable<WeatherForecast> Get()
