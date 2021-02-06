@@ -75,6 +75,12 @@ namespace ApiGateway.Controllers
             return System.Runtime.InteropServices.RuntimeInformation.OSDescription;    
         }
 
+        [HttpPost("startwork")]
+        public void PostStartWork(int count)
+        {        
+            _mq.Bus.PubSub.Publish(new StartWork { Count = count });
+        }
+
         [HttpGet("joke")]
         public string GetJoke()
         {            

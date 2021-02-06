@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
 using ServiceAMessages;
+using ServiceBMessages;
+using ServiceCMessages;
 
 namespace ServiceA
 {
@@ -21,6 +23,18 @@ namespace ServiceA
             await bus.Rpc.RespondAsync<ServiceAHealthCheckRequest, ServiceAHealthCheckResponse>(request =>
                 new ServiceAHealthCheckResponse()
             );
+
+            // Setup start-work handler
+            bus.PubSub.Subscribe<StartWork>("service-a", async msg => {
+                Console.WriteLine("StartWork - start");
+                for (var i=0; i<msg.Count; i++)
+                {
+                    var request = new ServiceCJokeRequest();
+                    var response = await bus.Rpc.RequestAsync<ServiceCJokeRequest, ServiceCJokeResponse>(request);
+                    Console.WriteLine(response.Joke);
+                }
+                Console.WriteLine("StartWork - done");
+            });            
 
             // Wait forever
             await Task.Delay(Timeout.Infinite);
