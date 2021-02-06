@@ -10,4 +10,8 @@
     <PackageReference Include="EasyNetQ" Version="6.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceBMessages\ServiceBMessages.csproj" />
+  </ItemGroup>
+
 </Project>

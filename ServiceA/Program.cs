@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
+using ServiceAMessages;
 
 namespace ServiceA
 {
@@ -16,7 +17,10 @@ namespace ServiceA
             // TODO: Poll to check when RabbitMQ is ready
             await Task.Delay(10*1000);
 
-            bus.PubSub.Subscribe<string>("service-a", msg => Console.WriteLine(msg));
+            // Setup health check handler
+            await bus.Rpc.RespondAsync<ServiceAHealthCheckRequest, ServiceAHealthCheckResponse>(request =>
+                new ServiceAHealthCheckResponse()
+            );
 
             // Wait forever
             await Task.Delay(Timeout.Infinite);

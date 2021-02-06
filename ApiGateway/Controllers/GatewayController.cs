@@ -30,17 +30,43 @@ namespace ApiGateway.Controllers
         {
             switch (serviceName)
             {
-                case "servicea":
+                case "a":
                     _logger.LogInformation("Performing health check for service a");
-                    return "a - ok";
-                case "serviceb":
+                    try
+                    {
+                        var response = _mq.Bus.Rpc.Request<ServiceAHealthCheckRequest, ServiceAHealthCheckResponse>(new ServiceAHealthCheckRequest());
+                        return "Ready";
+                    }
+                    catch (System.Exception)
+                    {
+                        return "Not ready";
+                    }
+                case "b":
                     _logger.LogInformation("Performing health check for service b");
-                    return "b - ok";
-                case "servicec":
+                    try
+                    {
+                        var response = _mq.Bus.Rpc.Request<ServiceBHealthCheckRequest, ServiceBHealthCheckResponse>(new ServiceBHealthCheckRequest());
+                        return "Ready";
+                    }
+                    catch (System.Exception)
+                    {
+                        return "Not ready";
+                    }
+                case "c":
                     _logger.LogInformation("Performing health check for service c");
-                    return "c - ok";
+                    try
+                    {
+                        var response = _mq.Bus.Rpc.Request<ServiceCHealthCheckRequest, ServiceCHealthCheckResponse>(new ServiceCHealthCheckRequest());
+                        return "Ready";
+                    }
+                    catch (System.Exception)
+                    {
+                        return "Not ready";
+                    }
+                default:
+                    _logger.LogError("Performing health. However the servicename is unknown");
+                    return "Unknown service";
             }
-            return "Unknown service";
         }            
 
 

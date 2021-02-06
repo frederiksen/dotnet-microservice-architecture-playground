@@ -17,6 +17,11 @@ namespace ServiceC
             // TODO: Poll to check when RabbitMQ is ready
             await Task.Delay(10*1000);
 
+            // Setup health check handler
+            await bus.Rpc.RespondAsync<ServiceCHealthCheckRequest, ServiceCHealthCheckResponse>(request =>
+                new ServiceCHealthCheckResponse()
+            );
+
 //            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
 
             var random = new Random();

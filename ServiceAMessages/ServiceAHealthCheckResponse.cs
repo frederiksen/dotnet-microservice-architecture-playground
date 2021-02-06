@@ -2,7 +2,7 @@
 
 namespace ServiceAMessages
 {
-    public class Class1
+    public class ServiceAHealthCheckResponse
     {
     }
 }

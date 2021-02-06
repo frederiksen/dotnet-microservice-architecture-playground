@@ -2,7 +2,7 @@
 
 namespace ServiceBMessages
 {
-    public class Class1
+    public class ServiceBHealthCheckRequest
     {
     }
 }
