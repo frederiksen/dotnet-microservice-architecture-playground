@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EasyNetQ;
 using ServiceCMessages;
-using ApiGateway.Helpers;
+using ApiGateway.MessageBroker;
 
 namespace ApiGateway.Controllers
 {

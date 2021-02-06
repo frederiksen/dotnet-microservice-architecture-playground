@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EasyNetQ;
-using ServiceCMessages;
 
-namespace ApiGateway.Helpers
+namespace ApiGateway.MessageBroker
 {
     public class MQ: IMQ
     {
