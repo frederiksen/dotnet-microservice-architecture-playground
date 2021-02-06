@@ -30,7 +30,7 @@ namespace ApiGateway
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Gateway", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Gateway", Description = "Microservice architecture playground project using .NET 5, RabbitMQ, Docker.", Version = "v1" });
             });
 
             // Dependency injection
