@@ -75,19 +75,12 @@ namespace ApiGateway.Controllers
             return System.Runtime.InteropServices.RuntimeInformation.OSDescription;    
         }
 
-
-        [HttpGet]
-//        public IEnumerable<WeatherForecast> Get()
-        public ServiceCTimeResponse Get()
+        [HttpGet("joke")]
+        public string GetJoke()
         {            
-            // bus.PubSub.Publish<ServiceCMessage1>(
-            //     new ServiceCMessage1 { Property1 = "Hej", Property2 = "med", Property3 = "dig" }
-            // );
-
-            var request = new ServiceCTimeRequest {Message = "Hvad er klokken?"};
-            var response = _mq.Bus.Rpc.Request<ServiceCTimeRequest, ServiceCTimeResponse>(request);
-
-            return response;
+            var request = new ServiceCJokeRequest();
+            var response = _mq.Bus.Rpc.Request<ServiceCJokeRequest, ServiceCJokeResponse>(request);
+            return response.Joke;
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Net.Http.Json;
 using EasyNetQ;
 using ServiceCMessages;
 
@@ -12,6 +16,8 @@ namespace ServiceC
         {
             Console.WriteLine("Starting service c...");
 
+            var httpClient = new HttpClient();
+
             IBus bus = RabbitHutch.CreateBus("host=rabbitmq;username=guest;password=guest");
             // RabbitMQ is ready in 10 sec.
             // TODO: Poll to check when RabbitMQ is ready
@@ -22,11 +28,24 @@ namespace ServiceC
                 new ServiceCHealthCheckResponse()
             );
 
-//            bus.PubSub.Subscribe<ServiceCMessage1>("service-c-message-1", msg => Console.WriteLine(msg));
+            // Setup joke handler
+            await bus.Rpc.RespondAsync<ServiceCJokeRequest, ServiceCJokeResponse>(async (request) =>
+                {
+                    try
+                    {
+                        var result = await httpClient.GetAsync("http://api.icndb.com/jokes/random");
 
-            var random = new Random();
-            await bus.Rpc.RespondAsync<ServiceCTimeRequest, ServiceCTimeResponse>(request =>
-                new ServiceCTimeResponse{ Message = "her er svaret: " + random.Next(1000) }
+                        result.EnsureSuccessStatusCode(); // throws if not 200-299
+
+                        var jsonString = await result.Content.ReadAsStringAsync();
+                        var joke = System.Text.Json.JsonSerializer.Deserialize<Joke>(jsonString);
+                        return new ServiceCJokeResponse{ Joke = joke.Value.Joke, Success = true };                
+                    }
+                    catch (System.Exception)
+                    {
+                        return new ServiceCJokeResponse{ Success = false };                
+                    }
+                }
             );
 
             // Wait forever
