@@ -9,6 +9,13 @@
 - Implement a API gateway using ASP.NET
 - Containerize using Docker and Docker Compose
 
+## Build and start
+
+```properties
+docker-compose build
+docker-compose up
+```  
+
 ## System overview
 
 ![System overview](https://raw.githubusercontent.com/frederiksen/dotnet-microservice-architecture-playground/main/system-overview.svg)
