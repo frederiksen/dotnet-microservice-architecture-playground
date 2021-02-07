@@ -11,4 +11,4 @@
 
 ## System overview
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![System overview](https://raw.githubusercontent.com/frederiksen/dotnet-microservice-architecture-playground/main/system-overview.svg)
